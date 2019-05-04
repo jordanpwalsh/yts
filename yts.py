@@ -70,7 +70,7 @@ if __name__ == "__main__":
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
 
-    deluge = Deluge("localhost", 58846, 'admin', 'deluge')
+    deluge = Deluge("localhost", 58846)
     deluge.connect()
     
 
