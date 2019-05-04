@@ -10,7 +10,7 @@ from termcolor import colored
 from pprint import pprint
 from deluge_client import DelugeRPCClient as Deluge
 
-MONGO_HOST = "deluge.lan"
+MONGO_HOST = "localhost"
 MONGO_PORT = 27017
 MONGO_DB = 'yts'
 YTS_API = "https://yts.am/api/v2"
