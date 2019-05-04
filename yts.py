@@ -64,7 +64,7 @@ def update_yts_data(num_pages=-1):
 
 
 if __name__ == "__main__":
-    max_items = 10
+    max_items = 100
     #update_yts_data()
 
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
