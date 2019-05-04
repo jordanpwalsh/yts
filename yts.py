@@ -76,9 +76,9 @@ if __name__ == "__main__":
 
     
 
-    movies = movies_collection.find({"downloaded": False})
-    for movie in movies:
-        print movie['title']
+    # movies = movies_collection.find({"downloaded": False})
+    # for movie in movies:
+    #     print movie['title']
 
 
     
