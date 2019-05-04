@@ -73,14 +73,11 @@ if __name__ == "__main__":
     print "Connecting to deluge"
     deluge = Deluge("127.0.0.1", 58846, 'admin', 'deluge')
     deluge.connect()
-    res = deluge.call('core.add_torrent_magnet', "magnet:?xt=urn:btih:6D0C1395C9F2714282A7EEA6E3C738D50CE21C77&dn=Saving+Mr.+Banks&tr=udp://open.demonii.com:1337/announce&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://torrent.gresille.org:80/announce&tr=udp://p4p.arenabg.com:1337&tr=udp://tracker.leechers-paradise.org:6969", {})
-    print res
-
-    
-
-    # movies = movies_collection.find({"downloaded": False})
-    # for movie in movies:
-    #     print movie['title']
+    #res = deluge.call('core.add_torrent_magnet', "magnet:?xt=urn:btih:6D0C1395C9F2714282A7EEA6E3C738D50CE21C77&dn=Saving+Mr.+Banks&tr=udp://open.demonii.com:1337/announce&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://torrent.gresille.org:80/announce&tr=udp://p4p.arenabg.com:1337&tr=udp://tracker.leechers-paradise.org:6969", {})
+    ##print res
+    movies = movies_collection.find({"downloaded": False})
+    for movie in movies:
+        print movie['title']
 
 
     
