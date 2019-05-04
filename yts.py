@@ -60,13 +60,8 @@ def update_yts_data(num_pages=-1):
                         total +=1
         page += 1
                 
-    
-
-
-if __name__ == "__main__":
+def enqueue_deluge():
     max_items = 20000
-    #update_yts_data()
-
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
@@ -87,6 +82,13 @@ if __name__ == "__main__":
         if count == max_items:
             break
 
+
+
+
+if __name__ == "__main__":
+    update_yts_data()
+
+    
 
 
     
