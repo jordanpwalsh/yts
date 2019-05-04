@@ -15,10 +15,7 @@ YTS_API = "https://yts.am/api/v2"
 MAGNET_TEMPLATE = 'magnet:?xt=urn:btih:{}&dn={}&tr=udp://open.demonii.com:1337/announce&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://torrent.gresille.org:80/announce&tr=udp://p4p.arenabg.com:1337&tr=udp://tracker.leechers-paradise.org:6969'
 
 
-
-
-
-if __name__ == "__main__":
+def get_yts_data():
     page = 1
     run = True
     
@@ -39,6 +36,11 @@ if __name__ == "__main__":
                     movie['magnet_url'] = MAGNET_TEMPLATE.format(torrent['hash'], url_encoded_movie_name)
                     movie.pop("torrents")
             movies_collection.insert(movie)
+
+
+if __name__ == "__main__":
+    get_yts_data()
+    
 
 
 
