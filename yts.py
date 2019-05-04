@@ -29,6 +29,8 @@ def update_yts_data(num_pages=-1):
     movies_collection = yts_db['movies']
 
     while(run):
+        if num_pages != -1 and page > num_pages:
+            break
         print colored("Pulling page: {}".format(page), "cyan")
         print colored("Total pulled: {}".format(total), "blue")
         response = requests.get("{}/list_movies.json?limit=50&page={}".format(YTS_API, page))
@@ -86,7 +88,7 @@ def enqueue_deluge():
 
 
 if __name__ == "__main__":
-    update_yts_data()
+    update_yts_data(1)
 
     
 
