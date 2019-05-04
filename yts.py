@@ -73,7 +73,8 @@ if __name__ == "__main__":
     print "Connecting to deluge"
     deluge = Deluge("127.0.0.1", 58846, 'admin', 'deluge')
     deluge.connect()
-    deluge.call('core.get_torrents_status', {}, ['name'])
+    res = deluge.call('core.get_torrents_status', {}, ['name'])
+    print res
 
     
 
