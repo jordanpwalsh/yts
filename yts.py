@@ -94,23 +94,6 @@ def enqueue_deluge():
             deluge.call('core.add_torrent_magnet', movie['magnet_url'], {})
             print colored("QUEUE:","yellow") + "{}".format(movie['title'])
 
-
-    #
-    ##print res
-    # movies = movies_collection.find({"downloaded": False})
-    # count = 0
-    # for movie in movies:
-    #     print "Adding movie {}".format(count),movie['title']
-    #     res = deluge.call('core.add_torrent_magnet', movie['magnet_url'], {})
-    #     movie['downloaded'] = True
-    #     movies_collection.save(movie)
-    #     count+=1
-    #     if count == max_items:
-    #         break
-
-
-
-
 if __name__ == "__main__":
     update_yts_data(1)
     enqueue_deluge()
