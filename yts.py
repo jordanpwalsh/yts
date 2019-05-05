@@ -68,7 +68,7 @@ def enqueue_deluge():
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
 
-    print colored("MESSG: Updating Deluge", "dark_olive_green")
+    print colored("MESSG: Updating Deluge", "cyan")
     deluge = Deluge("127.0.0.1", 58846, 'admin', 'deluge')
     deluge.connect()
     torrents = deluge.call('core.get_torrents_status', {}, {})
