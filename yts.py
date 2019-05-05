@@ -63,7 +63,7 @@ def update_yts_data(num_pages=-1):
         page += 1
                 
 def enqueue_deluge():
-    max_items = 20
+    max_items = 50
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
