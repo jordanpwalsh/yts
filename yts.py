@@ -90,7 +90,7 @@ def enqueue_deluge():
             movie = movies_collection.find_one({"downloaded": False})
             movie['downloaded'] = True
             movies_collection.save(movie);
-            deluge.call('core.add_torrent_magnet', movie['magnet_url'])
+            deluge.call('core.add_torrent_magnet', movie['magnet_url'], {})
             print "Added Movie: {}".format(movie['title'])
 
 
