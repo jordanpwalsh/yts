@@ -74,10 +74,14 @@ def enqueue_deluge():
     torrents = deluge.call('core.get_torrents_status', {}, {})
 
     #remove completed torrents
+    torrents_to_remove = []
     for torrent in torrents:
         if torrents[torrent]['is_finished']:
             deluge.call("core.remove_torrent", torrent, {})
-            del torrents[torrent]
+            torrents_to_remove.append(torrent)
+    
+    for id in torrents_to_remove:
+        del torrents[id]
 
     #add a new one(s) to replace
     diff = max_items - len(torrents)
