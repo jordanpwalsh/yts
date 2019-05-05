@@ -76,7 +76,7 @@ def enqueue_deluge():
     #remove completed torrents
     for torrent in torrents:
         if torrents[torrent]['is_finished']:
-            deluge.call("core.remove_torrent", torrent)
+            deluge.call("core.remove_torrent", torrent. {})
             del torrents[torrent]
 
     #add a new one(s) to replace
