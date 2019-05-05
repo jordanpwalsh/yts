@@ -67,8 +67,7 @@ def enqueue_deluge():
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
-
-    print colored("INFRM: Connecting to Deluge...", "white")
+    
     deluge = Deluge("127.0.0.1", 58846, 'admin', 'deluge')
     deluge.connect()
     torrents = deluge.call('core.get_torrents_status', {}, {})
@@ -79,7 +78,7 @@ def enqueue_deluge():
         if torrents[torrent]['is_finished']:
             deluge.call("core.remove_torrent", torrent, {})
             torrents_to_remove.append(torrent)
-            print colored("DELTE:","red"),"{}".format(torrent)
+            print colored("DELTE:","red") + "{}".format(torrent)
     
     for id in torrents_to_remove:
         del torrents[id]
@@ -92,7 +91,7 @@ def enqueue_deluge():
             movie['downloaded'] = True
             movies_collection.save(movie);
             deluge.call('core.add_torrent_magnet', movie['magnet_url'], {})
-            print colored("QUEUE:","yellow"), "{}".format(movie['title'])
+            print colored("QUEUE:","yellow") + "{}".format(movie['title'])
 
 
     #
