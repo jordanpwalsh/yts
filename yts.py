@@ -92,7 +92,7 @@ def enqueue_deluge():
             movie['downloaded'] = True
             movies_collection.save(movie);
             deluge.call('core.add_torrent_magnet', movie['magnet_url'], {})
-            print colored("QUEUE:","yellow") + "{}".format(movie['title'])
+            print colored("QUEUE:","yellow") + "{}".format(movie['title'].encode("utf-8"))
 
 if __name__ == "__main__":
     update_yts_data(1)
