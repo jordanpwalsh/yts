@@ -63,7 +63,7 @@ def update_yts_data(num_pages=-1):
         page += 1
                 
 def enqueue_deluge():
-    max_items = 10
+    max_items = 20
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
@@ -79,6 +79,7 @@ def enqueue_deluge():
         if torrents[torrent]['is_finished']:
             deluge.call("core.remove_torrent", torrent, {})
             torrents_to_remove.append(torrent)
+            print "Removed Finished Torrent: {}".format(torrent)
     
     for id in torrents_to_remove:
         del torrents[id]
