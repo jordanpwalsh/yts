@@ -72,8 +72,24 @@ def enqueue_deluge():
     deluge = Deluge("127.0.0.1", 58846, 'admin', 'deluge')
     deluge.connect()
     torrents = deluge.call('core.get_torrents_status', {}, {})
-    print torrents
-    print(dir(torrents))
+
+    #remove completed torrents
+    for torrent in torrents:
+        if torrent['is_finished']:
+            deluge.call("core.remove_torrent", torrent)
+            del torrents[torrent]
+
+    #add a new one(s) to replace
+    diff = max_items - len(torrents)
+    if(diff > 0):
+        for i in range(0,diff):
+            movie = movies_collection.findOne({"downloaded": False})
+            movie['downloaded'] = True
+            movie_collection.save(movie);
+            deluge.call('core.add_torrent_magnet', movie['magnet_url'])
+            print "Added Movie: {}".format(movie['title'])
+
+
     #
     ##print res
     # movies = movies_collection.find({"downloaded": False})
