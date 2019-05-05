@@ -87,7 +87,7 @@ def enqueue_deluge():
     diff = max_items - len(torrents)
     if(diff > 0):
         for i in range(0,diff):
-            movie = movies_collection.findOne({"downloaded": False})
+            movie = movies_collection.find_one({"downloaded": False})
             movie['downloaded'] = True
             movie_collection.save(movie);
             deluge.call('core.add_torrent_magnet', movie['magnet_url'])
