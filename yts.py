@@ -75,6 +75,7 @@ def enqueue_deluge():
 
     #remove completed torrents
     for torrent in torrents:
+        print torrent['is_finished']
         if torrent['is_finished']:
             deluge.call("core.remove_torrent", torrent)
             del torrents[torrent]
@@ -107,7 +108,7 @@ def enqueue_deluge():
 
 
 if __name__ == "__main__":
-    update_yts_data(5)
+    update_yts_data(1)
     enqueue_deluge()
 
     
