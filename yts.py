@@ -75,6 +75,8 @@ def enqueue_deluge():
 
     #remove completed torrents
     for torrent in torrents:
+        print type(torrent)
+        dir(torrent)
         print torrent
         if torrent['is_finished']:
             deluge.call("core.remove_torrent", torrent)
