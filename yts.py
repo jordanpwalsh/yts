@@ -95,7 +95,7 @@ def enqueue_deluge():
             print colored("QUEUE:","yellow") + "{}".format(movie['title'].encode("utf-8"))
 
 if __name__ == "__main__":
-    update_yts_data(1)
+    update_yts_data(10)
     enqueue_deluge()
 
     
