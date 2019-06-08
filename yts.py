@@ -63,7 +63,7 @@ def update_yts_data(num_pages=-1):
         page += 1
                 
 def enqueue_deluge():
-    max_items = 50
+    max_items = 25
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
@@ -88,14 +88,14 @@ def enqueue_deluge():
     diff = max_items - len(torrents)
     if(diff > 0):
         for i in range(0,diff):
-            movie = movies_collection.find({"downloaded": False}).sort([("rating", -1)]).limit(1)[0]
+            movie = movies_collection.find({"downloaded": False, "year": {"$gt": 1970}, "language": "English"}).sort([("rating", -1)]).limit(1)[0]
             movie['downloaded'] = True
             movies_collection.save(movie);
             deluge.call('core.add_torrent_magnet', movie['magnet_url'], {})
             print colored("QUEUE:","yellow") + "{}".format(movie['title'].encode("utf-8"))
 
 if __name__ == "__main__":
-    update_yts_data(10)
+    update_yts_data(1)
     enqueue_deluge()
 
     
