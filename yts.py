@@ -61,6 +61,7 @@ def update_yts_data(num_pages=-1):
                         else:
                             print colored("EXIST:", "green") + "{} - {}".format(movie['year'], movie_title)
                         total +=1
+                movie.pop("torrents")
         page += 1
                 
 def enqueue_deluge():
