@@ -52,7 +52,8 @@ def update_yts_data(num_pages=-1):
                         movie['torrent_seeds'] = torrent['seeds']
                         movie['torrent_hash'] = str(torrent['hash'])
                         movie['downloaded'] = False
-                        if not movies_collection.find_one({"$or":[{'torrent_hash': movie['torrent_hash']}, {'title': movie_title}]}):
+                        curr_movie = movies_collection.find_one({"$or":[{'torrent_hash': movie['torrent_hash']}, {'title': movie_title}]})
+                        if not curr_movie:
                             print colored("INSRT:", "yellow") +  "{} - {}".format(movie['year'], movie_title)
                             try:
                                 movies_collection.insert(movie)
@@ -60,6 +61,7 @@ def update_yts_data(num_pages=-1):
                                 print colored("ERROR: Duplicate hash very close together", "red")
                         else:
                             print colored("EXIST:", "green") + "{} - {}".format(movie['year'], movie_title)
+                            movies_collection.replace_one(curr_movie['_id'], movie)
                         total +=1
                 movie.pop("torrents")
         page += 1
@@ -98,7 +100,7 @@ def enqueue_deluge():
 
 if __name__ == "__main__":
     update_yts_data(1)
-    enqueue_deluge()
+    #enqueue_deluge()
 
     
 
