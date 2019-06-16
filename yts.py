@@ -61,7 +61,7 @@ def update_yts_data(num_pages=-1):
                                 print colored("ERROR: Duplicate hash very close together", "red")
                         else:
                             print colored("EXIST:", "green") + "{} - {}".format(movie['year'], movie_title)
-                            movies_collection.replace_one(curr_movie['_id'], movie)
+                            movies_collection.replace_one({"_id":curr_movie['_id']}, movie)
                         total +=1
                 movie.pop("torrents")
         page += 1
