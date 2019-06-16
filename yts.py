@@ -63,7 +63,7 @@ def update_yts_data(num_pages=-1):
         page += 1
                 
 def enqueue_deluge():
-    max_items = 100
+    max_items = 50
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
@@ -95,7 +95,7 @@ def enqueue_deluge():
             print colored("QUEUE:","yellow") + "({}) {} - {}".format(movie['rating'], movie['year'], movie['title'].encode("utf-8"))
 
 if __name__ == "__main__":
-    #update_yts_data(1)
+    update_yts_data(1)
     enqueue_deluge()
 
     
