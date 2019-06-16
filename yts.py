@@ -49,6 +49,7 @@ def update_yts_data(num_pages=-1):
                         movie_title = movie['title'].strip().encode("utf-8")
                         url_encoded_movie_name = urllib.quote_plus(movie_title)
                         movie['magnet_url'] = MAGNET_TEMPLATE.format(torrent['hash'], url_encoded_movie_name)
+                        movie['torrent_seeds'] = torrent['seeds']
                         movie['torrent_hash'] = str(torrent['hash'])
                         movie['downloaded'] = False
                         if not movies_collection.find_one({"$or":[{'torrent_hash': movie['torrent_hash']}, {'title': movie_title}]}):
