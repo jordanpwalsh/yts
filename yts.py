@@ -107,7 +107,7 @@ def enqueue_transmission():
     movies_collection = yts_db['movies']
 
     print colored("MESSG:Updating Transmission", "cyan")
-    tc = transmissionrpc.Client("localhost", port=9091, user='jordan',password="tranny1231")
+    tc = transmissionrpc.Client("localhost", port=9091, user='jordan',password="tranny123!")
     torrents = tc.get_torrents()
 
     #remove completed torrents
