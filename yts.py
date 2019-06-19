@@ -101,7 +101,7 @@ def enqueue_deluge():
             print colored("QUEUE:","yellow") + "({}) {} - {}".format(movie['rating'], movie['year'], movie['title'].encode("utf-8"))
 
 def enqueue_transmission():
-    max_items = 25
+    max_items = 2
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
