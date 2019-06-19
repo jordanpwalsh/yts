@@ -113,7 +113,7 @@ def enqueue_transmission():
     #remove completed torrents
     torrents_to_remove = []
     for torrent in torrents:
-        if torrents[status] in ['seeding', 'stopped']:
+        if torrent.status in ['seeding', 'stopped']:
             tc.remove_torrent(torrent.hashString)
             torrents_to_remove.append(torrent)
             print colored("DELTE:","red") + "{}".format(torrent.hashString)
