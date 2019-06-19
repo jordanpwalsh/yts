@@ -119,7 +119,7 @@ def enqueue_transmission():
             print colored("DELTE:","red") + "{}".format(torrent.hashString)
     
     for torrent in torrents_to_remove:
-        del torrent
+        torrents.remove(torrent)
 
     #add a new one(s) to replace
     diff = max_items - len(torrents)
