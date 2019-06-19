@@ -9,6 +9,7 @@ from base64 import b64encode, b64decode
 from termcolor import colored
 from pprint import pprint
 from deluge_client import DelugeRPCClient as Deluge
+import transmissionrpc
 
 MONGO_HOST = "localhost"
 MONGO_PORT = 27017
@@ -99,10 +100,40 @@ def enqueue_deluge():
             deluge.call('core.add_torrent_magnet', movie['magnet_url'], {})
             print colored("QUEUE:","yellow") + "({}) {} - {}".format(movie['rating'], movie['year'], movie['title'].encode("utf-8"))
 
+def enqueue_transmission():
+    max_items = 25
+    mongo = MongoClient(MONGO_HOST, MONGO_PORT)
+    yts_db = mongo['yts']
+    movies_collection = yts_db['movies']
+
+    print colored("MESSG:Updating Transmission", "cyan")
+    tc = transmissionrpc.Client("localhost", port=9091, user='jordan',password="tranny1231")
+    torrents = tc.get_torrents()
+
+    #remove completed torrents
+    torrents_to_remove = []
+    for torrent in torrents:
+        if torrents[status] in ['seeding', 'stopped']
+            tc.remove_torrent(torrent.hashString)
+            torrents_to_remove.append(torrent)
+            print colored("DELTE:","red") + "{}".format(torrent.hashString)
+    
+    for torrent in torrents_to_remove:
+        del torrent
+
+    #add a new one(s) to replace
+    diff = max_items - len(torrents)
+    if(diff > 0):
+        for i in range(0,diff):
+            movie = movies_collection.find({"downloaded": False, "year": {"$gt": 1970}, "language": "English"}).sort([("rating", -1),("year", -1)]).limit(1)[0]
+            movie['downloaded'] = True
+            movies_collection.save(movie);
+            tc.add_torrent(movie['magnet_url'])
+            print colored("QUEUE:","yellow") + "({}) {} - {}".format(movie['rating'], movie['year'], movie['title'].encode("utf-8"))
+
 if __name__ == "__main__":
     update_yts_data(1)
-    #enqueue_deluge()
-
+    enqueue_transmission()
     
 
 
