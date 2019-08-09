@@ -69,7 +69,7 @@ def update_yts_data(num_pages=-1):
         page += 1
                 
 def enqueue_deluge():
-    max_items = 50
+    max_items = 200
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
@@ -101,7 +101,7 @@ def enqueue_deluge():
             print colored("QUEUE:","yellow") + "({}) {} - {}".format(movie['rating'], movie['year'], movie['title'].encode("utf-8"))
 
 def enqueue_transmission():
-    max_items = 25
+    max_items = 300
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     yts_db = mongo['yts']
     movies_collection = yts_db['movies']
@@ -125,7 +125,11 @@ def enqueue_transmission():
     diff = max_items - len(torrents)
     if(diff > 0):
         for i in range(0,diff):
-            movie = movies_collection.find({"downloaded": False, "year": {"$gt": 1970}, "language": "English"}).sort([("rating", -1),("year", -1)]).limit(1)[0]
+            try:
+		movie = movies_collection.find({"downloaded": False, "year": {"$gt": 1990}, 'rating':{"$gte":4}, "language": "English"}).sort([("rating", -1),("year", -1)]).limit(1)[0]
+            except IndexError:
+		print colored("MESSG:No Remaining Movies", "cyan")
+		return
             movie['downloaded'] = True
             movies_collection.save(movie);
             tc.add_torrent(movie['magnet_url'])
