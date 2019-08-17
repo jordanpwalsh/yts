@@ -41,8 +41,8 @@ def update_eztv_data(num_pages=-1):
                 print colored("DONE:", "cyan") + "No shows remaining"
                 run = False
             for show in shows:
-                movie_title = show['title'].strip().encode("utf-8")
-                show_title['downloaded'] = False
+                show_title = show['title'].strip().encode("utf-8")
+                show['downloaded'] = False
                 curr_show = shows_collection.find_one({"$or":[{'hash': show['hash']}, {'title': show_title}]})
                 if not curr_show:
                     print colored("INSRT:", "yellow") +  "{}".format(show_title)
