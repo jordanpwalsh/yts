@@ -14,7 +14,7 @@ import transmissionrpc
 MONGO_HOST = "localhost"
 MONGO_PORT = 27017
 MONGO_DB = 'yts'
-EZTv_API = "https://eztv.io/api"
+EZTV_API = "https://eztv.io/api"
 
 
 def update_eztv_data(num_pages=-1):
@@ -31,7 +31,7 @@ def update_eztv_data(num_pages=-1):
             break
         print colored("Pulling page: {}".format(page), "cyan")
         print colored("Total pulled: {}".format(total), "blue")
-        response = requests.get("{}/lget-torrents?limit=50=100&page={}".format(YTS_API, page))
+        response = requests.get("{}/lget-torrents?limit=50=100&page={}".format(EZTV_API, page))
         if response.status_code == 200:
             response_json = response.json()
             try:
