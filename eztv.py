@@ -31,7 +31,8 @@ def update_eztv_data(num_pages=-1):
             break
         print colored("Pulling page: {}".format(page), "cyan")
         print colored("Total pulled: {}".format(total), "blue")
-        response = requests.get("{}/lget-torrents?limit=100&page={}".format(EZTV_API, page))
+        response = requests.get("{}/get-torrents?limit=100&page={}".format(EZTV_API, page))
+        print response
         if response.status_code == 200:
             response_json = response.json()
             try:
