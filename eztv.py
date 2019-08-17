@@ -47,7 +47,7 @@ def update_eztv_data(num_pages=-1):
                 if not curr_show:
                     print colored("INSRT:", "yellow") +  "{}".format(show_title)
                     try:
-                        shows_collection.insert(movie)
+                        shows_collection.insert(show)
                     except pymongo.errors.DuplicateKeyError:
                         print colored("ERROR: Duplicate hash very close together", "red")
                 else:
