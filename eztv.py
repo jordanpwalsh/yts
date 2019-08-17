@@ -51,8 +51,8 @@ def update_eztv_data(num_pages=-1):
                         print colored("ERROR: Duplicate hash very close together", "red")
                 else:
                     print colored("EXIST:", "green") + "{}".format(show_title)
-                            show['downloaded'] = curr_show['downloaded']
-                            shows_collection.replace_one({"_id":curr_show['_id']}, show)
+                    show['downloaded'] = curr_show['downloaded']
+                    shows_collection.replace_one({"_id":curr_show['_id']}, show)
                     total +=1
         page += 1
 
