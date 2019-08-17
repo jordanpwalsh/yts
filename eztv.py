@@ -58,4 +58,4 @@ def update_eztv_data(num_pages=-1):
 
 
 if __name__ == "__main__":
-    update_yts_data()
+    update_eztv_data()
