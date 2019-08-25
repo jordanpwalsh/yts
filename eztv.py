@@ -8,13 +8,15 @@ from time import sleep
 from base64 import b64encode, b64decode
 from termcolor import colored
 from pprint import pprint
-from deluge_client import DelugeRPCClient as Deluge
 import transmissionrpc
 
 MONGO_HOST = "localhost"
 MONGO_PORT = 27017
 MONGO_DB = 'yts'
 EZTV_API = "https://eztv.io/api"
+
+MOVIEDB_API_KEY="6b830dfc3adea7a73458188602bf1b0a"
+MOVIEDB_REQUEST_FORMAT="https://api.themoviedb.org/3/find/{}}?api_key=" + MOVIEDB_API_KEY + "&language=en-US&external_source=imdb_id"
 
 
 def update_eztv_data(num_pages=-1):
@@ -56,6 +58,26 @@ def update_eztv_data(num_pages=-1):
                 total +=1
         page += 1
 
+def scan_shows():
+    SHOW_GRP=1
+    SEP_GROUP=2
+    SEASON_GROUP=3
+    EPISODE_GROUP=4
+
+    mongo = MongoClient(MONGO_HOST, MONGO_PORT)
+    eztv_db = mongo['eztv']
+    shows_collection = eztv_db['eztv']
+
+
+    print colored("MESSG:Scanning & Parsing Shows...", "cyan")
+    shows = shows_collection.find()
+    for show in shows:
+        print "Testing {}".format(show['title'])
+
+
+
+
 
 if __name__ == "__main__":
-    update_eztv_data()
+    #update_eztv_data(1)
+    scan_shows()
