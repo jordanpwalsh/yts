@@ -110,7 +110,7 @@ def enqueue_transmission():
     for candidate in download_candidates:
         if items_processed >= max_items:
             break
-        download_dir = BASE_DOWNLOAD_PATH + "/{}/Season {}/{} S{}E{}.mkv".format(
+        download_dir = BASE_DOWNLOAD_PATH + "/{}/Season {}/".format(
             candidate['show_title'].strip(), candidate['season'], candidate['show_title'].strip(), candidate['season'], candidate['episode'])
         print download_dir, candidate['seeds']
         tc.add_torrent(candidate['magnet_url'], download_dir=download_dir)
