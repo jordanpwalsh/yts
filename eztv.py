@@ -76,7 +76,11 @@ def scan_shows():
     for show in shows:
         print "Testing {}".format(show['title'].encode("utf-8"))
         result = re.match(r"(^[\w\s-]+)(S([0-9])*E([0-9]*))",show['title'].encode("utf-8"))
-        print "Show: {} - Season: {} Episode: {}".format(result.group(SHOW_GRP),result.group(SEASON_GROUP), result.group(EPISODE_GROUP))
+        
+        try:
+            print "Show: {} - Season: {} Episode: {}".format(result.group(SHOW_GRP),result.group(SEASON_GROUP), result.group(EPISODE_GROUP))
+        except:
+            print "Couln't parse."
         count+=1
     print "Count: {}".format(count)
 
