@@ -101,6 +101,8 @@ def enqueue_transmission():
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     eztv_db = mongo['eztv']
     shows_collection = eztv_db['eztv']
+    tc = transmissionrpc.Client(
+        "localhost", port=9091, user='jordan', password="tranny123!")
 
     BASE_DOWNLOAD_PATH = '/synology/jordan/Downloads/incoming_tv'
     download_candidates = shows_collection.find(
@@ -111,6 +113,7 @@ def enqueue_transmission():
         download_dir = BASE_DOWNLOAD_PATH + "/{}/Season {}/{} S{}E{}.mkv".format(
             candidate['show_title'].strip(), candidate['season'], candidate['show_title'].strip(), candidate['season'], candidate['episode'])
         print download_dir, candidate['seeds']
+        tc.add_torrent(candidate['magnet_url'], download_dir=download_dir)
         items_processed += 1
 
 
