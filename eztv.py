@@ -105,7 +105,7 @@ def enqueue_transmission():
     download_candidates = shows_collection.find(
         {"parsed": True}).sort([("seeds", -1)])
     for candidate in download_candidates:
-        print download_candidates['show_title']
+        print candidate['show_title']
 
 
 if __name__ == "__main__":
