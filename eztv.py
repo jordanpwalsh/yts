@@ -9,6 +9,7 @@ from base64 import b64encode, b64decode
 from termcolor import colored
 from pprint import pprint
 import transmissionrpc
+import re
 
 MONGO_HOST = "localhost"
 MONGO_PORT = 27017
@@ -74,6 +75,8 @@ def scan_shows():
     shows = shows_collection.find()
     for show in shows:
         print "Testing {}".format(show['title'].encode("utf-8"))
+        result = re.match(r"(^[\w\s]+)(S([0-9])*E([0-9]*))",show['title'].encode("utf-8"))
+        
         count+=1
     print "Count: {}".format(count)
 
