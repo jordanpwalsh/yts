@@ -72,7 +72,7 @@ def scan_shows():
     print colored("MESSG:Scanning & Parsing Shows...", "cyan")
     shows = shows_collection.find()
     for show in shows:
-        print "Testing {}".format(show['title'])
+        print "Testing {}".format(show['title'].encode("utf-8"))
 
 
 
