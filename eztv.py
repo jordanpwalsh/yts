@@ -97,6 +97,7 @@ def scan_shows():
 
 def enqueue_transmission():
     max_items = 5
+    items_processed = 0
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     eztv_db = mongo['eztv']
     shows_collection = eztv_db['eztv']
@@ -105,9 +106,12 @@ def enqueue_transmission():
     download_candidates = shows_collection.find(
         {"parsed": True}).sort([("seeds", -1)])
     for candidate in download_candidates:
+        if items_processed >= max_items:
+            break
         download_dir = BASE_DOWNLOAD_PATH + "/{}/Season {}/{} S{}E{}.mkv".format(
             candidate['show_title'].strip(), candidate['season'], candidate['show_title'].strip(), candidate['season'], candidate['episode'])
-        print download_dir
+        print download_dir, candidate['seeds']
+        items_processed += 1
 
 
 if __name__ == "__main__":
