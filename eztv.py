@@ -109,3 +109,4 @@ def enqueue_transmission():
 if __name__ == "__main__":
     #update_eztv_data(1)
     #scan_shows()
+    enqueue_transmission()
