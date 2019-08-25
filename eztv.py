@@ -64,6 +64,7 @@ def scan_shows():
     SEASON_GROUP=3
     EPISODE_GROUP=4
 
+    count=0
     mongo = MongoClient(MONGO_HOST, MONGO_PORT)
     eztv_db = mongo['eztv']
     shows_collection = eztv_db['eztv']
@@ -73,6 +74,8 @@ def scan_shows():
     shows = shows_collection.find()
     for show in shows:
         print "Testing {}".format(show['title'].encode("utf-8"))
+        count+=1
+    print "Count: {}".format(count)
 
 
 
