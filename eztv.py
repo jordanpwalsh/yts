@@ -89,10 +89,23 @@ def scan_shows():
         count+=1
     print "Count: {}".format(count)
 
+def enqueue_transmission():
+    max_items=5
+    mongo = MongoClient(MONGO_HOST, MONGO_PORT)
+    eztv_db = mongo['eztv']
+    shows_collection = eztv_db['eztv']
+
+    BASE_DOWNLOAD_PATH='/synology/jordan/Downloads/incoming_tv'
+    download_candidates = shows_collection.find({"parsed": True}).sort({"seeds": -1})
+    for candidate in download_candidates:
+        print download_candidates['show_title']
+
+
+
 
 
 
 
 if __name__ == "__main__":
     #update_eztv_data(1)
-    scan_shows()
+    #scan_shows()
