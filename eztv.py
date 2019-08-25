@@ -80,7 +80,7 @@ def scan_shows():
         try:
             print "Show: {} - Season: {} Episode: {}".format(result.group(SHOW_GRP),result.group(SEASON_GROUP), result.group(EPISODE_GROUP))
         except:
-            print "Couln't parse."
+            print colored("Couln't parse.","red")
         count+=1
     print "Count: {}".format(count)
 
