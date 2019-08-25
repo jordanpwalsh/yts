@@ -83,6 +83,7 @@ def scan_shows():
             show['season'] = result.group(SEASON_GROUP)
             show['episode'] = result.group(EPISODE_GROUP)
             show['parsed'] = True
+            shows_collection.save(show)
         except:
             print colored("Couln't parse.","red")
         count+=1
