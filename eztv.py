@@ -106,7 +106,7 @@ def enqueue_transmission():
         {"parsed": True}).sort([("seeds", -1)])
     for candidate in download_candidates:
         download_dir = BASE_DOWNLOAD_PATH + "/{}/Season {}/{} S{}E{}.mkv".format(
-            candidate['show_title'], candidate['season'], candidate['show_title'], candidate['season'], candidate['episode'])
+            candidate['show_title'].strip(), candidate['season'], candidate['show_title'].strip(), candidate['season'], candidate['episode'])
         print download_dir
 
 
