@@ -103,7 +103,7 @@ def enqueue_transmission():
 
     BASE_DOWNLOAD_PATH = '/synology/jordan/Downloads/incoming_tv'
     download_candidates = shows_collection.find(
-        {"parsed": True}).sort(("seeds", -1))
+        {"parsed": True}).sort([("seeds", -1)])
     for candidate in download_candidates:
         print download_candidates['show_title']
 
